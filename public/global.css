@@ -51,13 +51,6 @@ header {
 
 
 [slot="background"] {
-	background-color: pink;
-	height: 100vh;
-	justify-content: center;
-	background-position: 50% 50%;
-	background-repeat: no-repeat;
-	background-size: cover;
-	flex-direction: column;
 	margin-top: -16px;
 }
 
