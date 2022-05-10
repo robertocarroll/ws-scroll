@@ -1,44 +1,52 @@
 <script>
 	import { onMount } from "svelte";
 	import Scroller from "./layout/Scroller.svelte";
+	//import Scroller from '@sveltejs/svelte-scroller';
 	import Header from "./layout/Header.svelte";
 
 	let index, offset, progress, count;
-
-	let bgimage = null;
-
-	let style = '';
+	let innerHeight;
+	let bgimage = "img/Sky_Frame.jpeg";
+	let style;
 
 	// CONFIG FOR SCROLLER COMPONENTS
 	// Config - Once a section crosses this point, it becomes 'active'
-	const threshold = 0.5;
+	const threshold = 0.3;
 	// State
 
 	let id = {}; // Object to hold visible section IDs of Scroller components
 	let idPrev = {}; // Object to keep track of previous IDs, to compare for changes
 	onMount(() => {
 		idPrev = { ...id };
+		// set first background image
+		style = `background-image: url(${bgimage});
+		height: ${innerHeight}px;`;
 	});
 
 	// Actions for Scroller components
 	const actions = {
-		map: { // Actions for <Scroller/> with id="map"
-			map01: () => { // Action for <section/> with data-id="map01"
+		first_images: { // Actions for <Scroller/> with id="first-images"
+			image01: () => { // Action for <section/> with data-id="map01"
 				style = "";
-				bgimage = "";
+				bgimage = "img/Sky_Frame.jpeg";
 				console.log("first function firing");
-				console.log
+				style = `background: url(${bgimage});
+		height: ${innerHeight}px;`;
 			},
 
-			map02: () => { // Action for <section/> with data-id="map02"
-				console.log("second function firing");
+			image02: () => { // Action for <section/> with data-id="map02"
 				style = "";
 				bgimage = "img/test1.jpg";
-				style += `background-image: url(${bgimage});`;
+				style = `background-image: url(${bgimage});
+		height: ${innerHeight}px;`;
+				console.log("second function firing");
+
 			},
 
-			map03: () => { // Action for <section/> with data-id="map02"
-				style = "";
+			image03: () => { // Action for <section/> with data-id="image03"
+				bgimage = "img/Rail_Technology3.jpg";
+				style = `background-image: url(${bgimage});
+		height: ${innerHeight}px;`;
 				console.log("third function firing");
 			}
 		}
@@ -57,14 +65,19 @@
 	}
 	$: id && runActions(Object.keys(actions)); // Run above code when 'id' object changes
 
-//	$: console.log(id);
-
 </script>
 
+<svelte:window bind:innerHeight={innerHeight} />
+
+
+<svelte:head>
+
+	<link rel="preload" as="image" href="img/Australia_Trevor2.jpg" />
+
+</svelte:head>
+
 <style>
-	section {
-		height: 100vh;
-	}
+
 </style>
 
 <Header bgimage="img/Australia_Trevor2.jpg">
@@ -74,7 +87,8 @@
 	</p>
 </Header>
 
-<Scroller top="{0}" bottom="{0.6}" bind:id={id['map']} bind:count bind:index bind:offset bind:progress {threshold}>
+<Scroller top="{0}" bottom="{1}" bind:id={id['first_images']} bind:count bind:index bind:offset bind:progress
+	{threshold}>
 	<div slot="background" style="{style}">
 		<p>current section: <strong>{index + 1}/{count}</strong></p>
 		<progress value="{count ? (index + 1) / count : 0}"></progress>
@@ -87,7 +101,7 @@
 	</div>
 
 	<div slot="foreground">
-		<section data-id="map01">
+		<section data-id="image01">
 			<div class="scroll-box" class:active={index===0}>
 				<p>
 					Section 1 - This chart shows the <strong>area in square kilometres</strong> of each local authority
@@ -96,7 +110,7 @@
 				</p>
 			</div>
 		</section>
-		<section data-id="map02">
+		<section data-id="image02">
 			<div class="scroll-box">
 				<p>
 					Section 2 - This chart shows the <strong>area in square kilometres</strong> of each local authority
@@ -106,7 +120,7 @@
 			</div>
 		</section>
 
-		<section data-id="map03">
+		<section data-id="image03">
 			<div class="scroll-box">
 				<p>
 					Section 3 - This chart shows the <strong>area in square kilometres</strong> of each local authority
@@ -117,3 +131,22 @@
 		</section>
 	</div>
 </Scroller>
+
+
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+	aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+	Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+	sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>
+
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+	aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+	Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+	sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+<p>
+
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+	aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+	Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+	sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
