@@ -186,30 +186,28 @@
 	Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
 	sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-
-
 <Scroller {top} {threshold} {bottom} bind:mapindex={mapindex[1]}>
 	<div slot="background">
 		<figure>
 			<div class="col-full height-full">
-				<Map bind:map={map} />
+				<Map />
 			</div>
 		</figure>
 	</div>
 
 	<div slot="foreground">
 		<section>
-			<div class="col-medium">
+			<div class="scroll-box">
 				<p>This is a map zoomed to the extents of <span class="em em-muted">England and Wales</span>.</p>
 			</div>
 		</section>
 		<section>
-			<div class="col-medium">
+			<div class="scroll-box">
 				<p>This is where <span class="em em-muted">Fareham, Hampshire</span> is on the map.</p>
 			</div>
 		</section>
 		<section>
-			<div class="col-medium">
+			<div class="scroll-box">
 				<p>This is where <span class="em em-muted">Newport, Gwent</span> is on the map.</p>
 			</div>
 		</section>

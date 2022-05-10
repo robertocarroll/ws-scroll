@@ -28,12 +28,12 @@
         link.href = 'https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.css';
 
         link.onload = () => {
-            mapbox.accessToken = 'pk.eyJ1IjoiaXBwZiIsImEiOiJjbDMwOTNvaTkwMDU2M2tvN3lhYmlwenprIn0.eFT7i-T8OCBdtg8IM5qyLQ';
+            mapbox.accessToken = 'pk.eyJ1IjoiaXBwZiIsImEiOiJjbDMwYmV3YW4waWQ4M2ptdWZxanN4cTV6In0.3cbYcSbeRKB--M9vvoYNPQ';
             map = new mapbox.Map({
                 container,
                 style: 'mapbox://styles/mapbox/streets-v11',
-                interactive: false,
-                ...options
+                center: [-74.5, 40], // starting position [lng, lat]
+                zoom: 9 // starting zoom
             });
             map.scrollZoom.disable();
         };
