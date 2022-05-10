@@ -3,6 +3,7 @@
 	import Scroller from "./layout/Scroller.svelte";
 	//import Scroller from '@sveltejs/svelte-scroller';
 	import Header from "./layout/Header.svelte";
+	import Map from "./layout/Map.svelte";
 
 	let index, offset, progress, count;
 	let innerHeight;
@@ -12,21 +13,28 @@
 	// CONFIG FOR SCROLLER COMPONENTS
 	// Config - Once a section crosses this point, it becomes 'active'
 	const threshold = 0.3;
+	const top = 0;
+	const bottom = 1;
+
 	// State
 
 	let id = {}; // Object to hold visible section IDs of Scroller components
 	let idPrev = {}; // Object to keep track of previous IDs, to compare for changes
+
+	let mapindex = [];
+	let mapindexPrev = [];
 	onMount(() => {
 		idPrev = { ...id };
 		// set first background image
 		style = `background-image: url(${bgimage});
 		height: ${innerHeight}px;`;
+		mapindexPrev = [...mapindex];
 	});
 
 	// Actions for Scroller components
 	const actions = {
 		first_images: { // Actions for <Scroller/> with id="first-images"
-			image01: () => { // Action for <section/> with data-id="map01"
+			image01: () => { // Action for <section/> with data-id="image01"
 				style = "";
 				bgimage = "img/Sky_Frame.jpeg";
 				console.log("first function firing");
@@ -34,7 +42,7 @@
 		height: ${innerHeight}px;`;
 			},
 
-			image02: () => { // Action for <section/> with data-id="map02"
+			image02: () => { // Action for <section/> with data-id="image02"
 				style = "";
 				bgimage = "img/test1.jpg";
 				style = `background-image: url(${bgimage});
@@ -51,6 +59,33 @@
 			}
 		}
 	};
+
+
+	// MAP CODE
+	// Config
+
+	const mapbounds = {
+		ew: [[-5.816, 49.864], [1.863, 55.872]],
+		fareham: [[-1.2280, 50.8368], [-1.1650, 50.8699]],
+		newport: [[-3.0682, 51.5448], [-2.9170, 51.6258]]
+	};
+	// State
+	let map = null;
+
+	// Actions for MAP scroller
+	const mapActions = [
+		() => { map.fitBounds(mapbounds.ew) },
+		() => { map.fitBounds(mapbounds.fareham) },
+		() => { map.fitBounds(mapbounds.newport) }
+	];
+
+	// Reactive code to trigger MAP actions
+	$: if (map && mapindex[1] != mapindexPrev[1]) {
+		if (mapActions[+mapindex[1]]) {
+			mapActions[+mapindex[1]]();
+		}
+		mapindexPrev[1] = mapindex[1];
+	}
 
 	// Code to run Scroller actions when new caption IDs come into view
 	function runActions(codes = []) {
@@ -150,3 +185,33 @@
 	aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 	Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
 	sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+
+
+<Scroller {top} {threshold} {bottom} bind:mapindex={mapindex[1]}>
+	<div slot="background">
+		<figure>
+			<div class="col-full height-full">
+				<Map bind:map={map} />
+			</div>
+		</figure>
+	</div>
+
+	<div slot="foreground">
+		<section>
+			<div class="col-medium">
+				<p>This is a map zoomed to the extents of <span class="em em-muted">England and Wales</span>.</p>
+			</div>
+		</section>
+		<section>
+			<div class="col-medium">
+				<p>This is where <span class="em em-muted">Fareham, Hampshire</span> is on the map.</p>
+			</div>
+		</section>
+		<section>
+			<div class="col-medium">
+				<p>This is where <span class="em em-muted">Newport, Gwent</span> is on the map.</p>
+			</div>
+		</section>
+	</div>
+</Scroller>
