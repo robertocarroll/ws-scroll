@@ -8,7 +8,7 @@
 
 	let index, offset, progress, count;
 	let innerHeight;
-	let bgimage = "img/Sky_Frame.jpeg";
+	let bgimage = "img/Rail_Technology3.jpg";
 	let style;
 
 	// CONFIG FOR SCROLLER COMPONENTS
@@ -80,15 +80,13 @@
 </svelte:head>
 
 <Header bgimage="img/Australia_Trevor2.jpg">
-	<h1>This is the title of the article</h1>
-	<p class="text-big" style="margin-top: 5px">
-		This is a short text description of the article that might take up a couple of lines
-	</p>
+	<h1 class="ws-hero-title white hero-title-impact">1.<br> WORLDSKILLS <span class="yellow">INCREASES
+			THE NUMBER</span> OF SKILLED YOUNG PEOPLE</h1>
 </Header>
 
 <Scroller top="{0}" bottom="{1}" bind:id={id['first_images']} bind:count bind:index bind:offset bind:progress
 	{threshold}>
-	<div slot="background" style="{style}">
+	<div slot="background" class="bg-full-image" style="{style}">
 		<p>current section: <strong>{index + 1}/{count}</strong></p>
 		<progress value="{count ? (index + 1) / count : 0}"></progress>
 
@@ -101,7 +99,7 @@
 
 	<div slot="foreground">
 		<section data-id="image01">
-			<div class="scroll-box" class:active={index===0}>
+			<div class="scroll-box">
 				<p>
 					Section 1 - This chart shows the <strong>area in square kilometres</strong> of each local authority
 					district in
@@ -131,21 +129,21 @@
 	</div>
 </Scroller>
 
-
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-	aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-	Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-	sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<p>
-
-	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-	aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-	Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-	sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-<p>
-
-	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-	aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-	Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-	sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<section style="background-image: url(img/Sky_Frame.jpeg);" class="bg-full-image vh-100">
+	<div class="hero">
+		<figure class="ws-hero ws-hero-quote ws-hero-cyan ws-hero-sm">
+			<blockquote class="ws-hero-title ws-small">“When I won a gold medal at WorldSkills Sao Paulo 2015, the world
+				was
+				seeing
+				a boy that came from a place of social vulnerability, all because that boy had one opportunity to learn
+				a skill that he fell in love with.
+				My life was transformed because of WorldSkills. And I want everyone in the world to have the opportunity
+				to do the same.”</blockquote>
+			<figcaption>
+				<div class="ws-hero-desc">
+					<p>- Leo Rodrigues</p>
+				</div>
+			</figcaption>
+		</figure>
+	</div>
+</section>

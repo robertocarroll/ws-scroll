@@ -13,7 +13,7 @@
 </script>
 
 <header style="{style}">
-    <div class="hero">
+    <div class="hero ws-neg-margin">
         <div class="center">
             <slot></slot>
         </div>
