@@ -21,14 +21,11 @@
 	let id = {}; // Object to hold visible section IDs of Scroller components
 	let idPrev = {}; // Object to keep track of previous IDs, to compare for changes
 
-	let mapindex = [];
-	let mapindexPrev = [];
 	onMount(() => {
 		idPrev = { ...id };
 		// set first background image
 		style = `background-image: url(${bgimage});
 		height: ${innerHeight}px;`;
-		mapindexPrev = [...mapindex];
 	});
 
 	// Actions for Scroller components
@@ -60,33 +57,6 @@
 		}
 	};
 
-
-	// MAP CODE
-	// Config
-
-	const mapbounds = {
-		ew: [[-5.816, 49.864], [1.863, 55.872]],
-		fareham: [[-1.2280, 50.8368], [-1.1650, 50.8699]],
-		newport: [[-3.0682, 51.5448], [-2.9170, 51.6258]]
-	};
-	// State
-	let map = null;
-
-	// Actions for MAP scroller
-	const mapActions = [
-		() => { map.fitBounds(mapbounds.ew) },
-		() => { map.fitBounds(mapbounds.fareham) },
-		() => { map.fitBounds(mapbounds.newport) }
-	];
-
-	// Reactive code to trigger MAP actions
-	$: if (map && mapindex[1] != mapindexPrev[1]) {
-		if (mapActions[+mapindex[1]]) {
-			mapActions[+mapindex[1]]();
-		}
-		mapindexPrev[1] = mapindex[1];
-	}
-
 	// Code to run Scroller actions when new caption IDs come into view
 	function runActions(codes = []) {
 		codes.forEach(code => {
@@ -104,16 +74,9 @@
 
 <svelte:window bind:innerHeight={innerHeight} />
 
-
 <svelte:head>
-
 	<link rel="preload" as="image" href="img/Australia_Trevor2.jpg" />
-
 </svelte:head>
-
-<style>
-
-</style>
 
 <Header bgimage="img/Australia_Trevor2.jpg">
 	<h1>This is the title of the article</h1>
@@ -185,31 +148,3 @@
 	aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 	Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
 	sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-<Scroller {top} {threshold} {bottom} bind:mapindex={mapindex[1]}>
-	<div slot="background">
-		<figure>
-			<div class="col-full height-full">
-				<Map />
-			</div>
-		</figure>
-	</div>
-
-	<div slot="foreground">
-		<section>
-			<div class="scroll-box">
-				<p>This is a map zoomed to the extents of <span class="em em-muted">England and Wales</span>.</p>
-			</div>
-		</section>
-		<section>
-			<div class="scroll-box">
-				<p>This is where <span class="em em-muted">Fareham, Hampshire</span> is on the map.</p>
-			</div>
-		</section>
-		<section>
-			<div class="scroll-box">
-				<p>This is where <span class="em em-muted">Newport, Gwent</span> is on the map.</p>
-			</div>
-		</section>
-	</div>
-</Scroller>
