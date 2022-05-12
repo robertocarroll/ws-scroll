@@ -29,6 +29,35 @@
 		height: ${innerHeight}px;`;
 	});
 
+	// Constants
+	const datasets = ["region", "district"];
+	const topojson = "./data/geo_lad2021.json";
+	const mapstyle = "https://bothness.github.io/ons-basemaps/data/style-omt.json";
+	const mapbounds = {
+		uk: [
+			[-9, 49],
+			[2, 61]
+		]
+	};
+	// Data
+	let data = { district: {}, region: {} };
+	let metadata = { district: {}, region: {} };
+	let geojson;
+	// Element bindings
+	let map = null; // Bound to mapbox 'map' instance once initialised
+	// State
+	let hovered; // Hovered district (chart or map)
+	let selected; // Selected district (chart or map)
+	$: region = selected && metadata.district.lookup ? metadata.district.lookup[selected].parent : null; // Gets region code for 'selected'
+	$: chartHighlighted = metadata.district.array && region ? metadata.district.array.filter(d => d.parent == region).map(d => d.code) : []; // Array of district codes in 'region'
+	let mapHighlighted = []; // Highlighted district (map only)
+	let xKey = "area"; // xKey for scatter chart
+	let yKey = null; // yKey for scatter chart
+	let zKey = null; // zKey (color) for scatter chart
+	let rKey = null; // rKey (radius) for scatter chart
+	let mapKey = "density"; // Key for data to be displayed on map
+	let explore = false; // Allows chart/map interactivity to be toggled on/off
+
 
 	// Actions for Scroller components
 	const actions = {
@@ -87,6 +116,33 @@
 				style = `background-image: url(${bgimage});
 		height: ${innerHeight}px;`;
 				console.log("third function firing");
+			},
+			map: { // Actions for <Scroller/> with id="map"
+				map01: () => { // Action for <section/> with data-id="map01"
+					fitBounds(mapbounds.uk);
+					mapKey = "density";
+					mapHighlighted = [];
+					explore = false;
+				},
+				map02: () => {
+					fitBounds(mapbounds.uk);
+					mapKey = "age_med";
+					mapHighlighted = [];
+					explore = false;
+				},
+				map03: () => {
+					let hl = [...data.district.indicators].sort((a, b) => b.age_med - a.age_med)[0];
+					fitById(hl.code);
+					mapKey = "age_med";
+					mapHighlighted = [hl.code];
+					explore = false;
+				},
+				map04: () => {
+					fitBounds(mapbounds.uk);
+					mapKey = "age_med";
+					mapHighlighted = [];
+					explore = true;
+				}
 			}
 		}
 
@@ -106,6 +162,60 @@
 	$: id && runActions(Object.keys(actions)); // Run above code when 'id' object changes
 
 
+	datasets.forEach(geo => {
+		getData(`./data/data_${geo}.csv`)
+			.then(arr => {
+				let meta = arr.map(d => ({
+					code: d.code,
+					name: d.name,
+					parent: d.parent ? d.parent : null
+				}));
+				let lookup = {};
+				meta.forEach(d => {
+					lookup[d.code] = d;
+				});
+				metadata[geo].array = meta;
+				metadata[geo].lookup = lookup;
+				let indicators = arr.map((d, i) => ({
+					...meta[i],
+					area: d.area,
+					pop: d['2020'],
+					density: d.density,
+					age_med: d.age_med
+				}));
+				if (geo == "district") {
+					['density', 'age_med'].forEach(key => {
+						let values = indicators.map(d => d[key]).sort((a, b) => a - b);
+						let breaks = getBreaks(values);
+						indicators.forEach((d, i) => indicators[i][key + '_color'] = getColor(d[key], breaks, colors.seq));
+					});
+				}
+				data[geo].indicators = indicators;
+				let years = [
+					2001, 2002, 2003, 2004, 2005,
+					2006, 2007, 2008, 2009, 2010,
+					2011, 2012, 2013, 2014, 2015,
+					2016, 2017, 2018, 2019, 2020
+				];
+				let timeseries = [];
+				arr.forEach(d => {
+					years.forEach(year => {
+						timeseries.push({
+							code: d.code,
+							name: d.name,
+							value: d[year],
+							year
+						});
+					});
+				});
+				data[geo].timeseries = timeseries;
+			});
+	});
+	getTopo(topojson, 'geog')
+		.then(geo => {
+			geo.features.sort((a, b) => a.properties.AREANM.localeCompare(b.properties.AREANM));
+			geojson = geo;
+		});
 
 </script>
 
@@ -229,3 +339,83 @@
 		</section>
 	</div>
 </Scroller>
+
+{#if geojson && data.district.indicators}
+<Scroller {threshold} bind:id={id['map']}>
+	<div slot="background">
+		<figure>
+			<div class="col-full height-full">
+				<Map style={mapstyle} bind:map interactive={false} location={{bounds: mapbounds.uk}}>
+					<MapSource id="lad" type="geojson" data={geojson} promoteId="AREACD" maxzoom={13}>
+						<MapLayer id="lad-fill" idKey="code" colorKey={mapKey + "_color" }
+							data={data.district.indicators} type="fill" select {selected} on:select={doSelect}
+							clickIgnore={!explore} hover {hovered} on:hover={doHover} highlight
+							highlighted={mapHighlighted} paint={{ 'fill-color' : ['case', ['!=', ['
+							feature-state', 'color' ], null], ['feature-state', 'color' ], 'rgba(255, 255, 255, 0)'
+							], 'fill-opacity' : 0.7 }}>
+							<MapTooltip content={ hovered ? `${metadata.district.lookup[hovered].name}<br />
+							<strong>${data.district.indicators.find(d => d.code == hovered)[mapKey].toLocaleString()}
+								${units[mapKey]}</strong>` : ''
+							}/>
+						</MapLayer>
+						<MapLayer id="lad-line" type="line" paint={{ 'line-color' : ['case', ['==', ['
+							feature-state', 'hovered' ], true], 'orange' , ['==', [' feature-state', 'selected' ],
+							true], 'black' , ['==', [' feature-state', 'highlighted' ], true], 'black'
+							, 'rgba(255,255,255,0)' ], 'line-width' : 2 }} />
+					</MapSource>
+				</Map>
+			</div>
+		</figure>
+	</div>
+
+	<div slot="foreground">
+		<section data-id="map01">
+			<div class="col-medium">
+				<p>
+					This map shows <strong>population density</strong> by district. Districts are coloured from <Em
+						color={colors.seq[0]}>least dense</Em> to <Em color={colors.seq[4]}>most dense</Em>. You can
+					hover to see the district name and density.
+				</p>
+			</div>
+		</section>
+		<section data-id="map02">
+			<div class="col-medium">
+				<p>
+					The map now shows <strong>median age</strong>, from <Em color={colors.seq[0]}>youngest</Em> to <Em
+						color={colors.seq[4]}>oldest</Em>.
+				</p>
+			</div>
+		</section>
+		<section data-id="map03">
+			<div class="col-medium">
+				<!-- This gets the data object for the district with the oldest median age -->
+				{#each [[...data.district.indicators].sort((a, b) => b.age_med - a.age_med)[0]] as district}
+				<p>
+					The map is now zoomed on <Em color={district.age_med_color}>{district.name}</Em>, the district with
+					the oldest median age, {district.age_med} years.
+				</p>
+				{/each}
+			</div>
+		</section>
+		<section data-id="map04">
+			<div class="col-medium">
+				<h3>Select a district</h3>
+				<p>Use the selection box below or click on the map to select and zoom to a district.</p>
+				{#if geojson}
+				<p>
+					<!-- svelte-ignore a11y-no-onchange -->
+					<select bind:value={selected} on:change={()=> fitById(selected)}>
+						<option value={null}>Select one</option>
+						{#each geojson.features as place}
+						<option value={place.properties.AREACD}>
+							{place.properties.AREANM}
+						</option>
+						{/each}
+					</select>
+				</p>
+				{/if}
+			</div>
+		</section>
+	</div>
+</Scroller>
+{/if}
