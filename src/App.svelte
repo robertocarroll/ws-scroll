@@ -3,7 +3,8 @@
 	import Scroller from "./layout/Scroller.svelte";
 	//import Scroller from '@sveltejs/svelte-scroller';
 	import Header from "./layout/Header.svelte";
-	import Map from "./layout/Map.svelte";
+
+	import { Map, MapSource, MapLayer, MapTooltip } from "@onsvisual/svelte-maps";
 
 	let index, offset, progress, count;
 	let innerHeight;
