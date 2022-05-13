@@ -12,6 +12,13 @@
 	let bgimage = "img/Rail_Technology3.jpg";
 	let style;
 
+	let time = 0;
+	let duration;
+
+	$: time = duration * progress;
+
+	$: console.log(progress);
+
 	// CONFIG FOR SCROLLER COMPONENTS
 	// Config - Once a section crosses this point, it becomes 'active'
 	const threshold = 0.3;
@@ -270,6 +277,40 @@
 				<Map bind:map={map} />
 			</div>
 		</figure>
+	</div>
+
+	<div slot="foreground">
+		<section>
+			<div class="col-medium">
+				<p>This is a map zoomed to the extents of <span class="em em-muted">England and Wales</span>.</p>
+			</div>
+		</section>
+		<section>
+			<div class="col-medium">
+				<p>This is where <span class="em em-muted">Fareham, Hampshire</span> is on the map.</p>
+			</div>
+		</section>
+		<section>
+			<div class="col-medium">
+				<p>This is where <span class="em em-muted">Newport, Gwent</span> is on the map.</p>
+			</div>
+		</section>
+	</div>
+</Scroller>
+
+
+<Scroller top="{0}" bottom="{1}" bind:id={id['first_images']} bind:count bind:index bind:offset bind:progress
+	{threshold}>
+	<div slot="background">
+		<div class="video-container">
+			<video bind:currentTime={time} bind:duration preload="metadata" muted
+				src="https://static01.nyt.com/newsgraphics/2019/10/23/turkey-syria-video-upload/71ab097907156ca46fb7ffd4d21dfbd119fb47e8/syria-turkey-reconstruct-7-800.mp4"
+				type="video/mp4" />
+			<!--
+				alternative source:
+				src="https://int.nyt.com/newsgraphics/2020/beirut-explosion-video/main/warehouse-800.mp4" 
+			  -->
+		</div>
 	</div>
 
 	<div slot="foreground">
