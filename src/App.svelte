@@ -10,6 +10,7 @@
 	let index, offset, progress, count;
 	let innerHeight;
 	let bgimage = "img/Rail_Technology3.jpg";
+	let bgtext;
 	let style;
 	let fadein = false;
 
@@ -60,9 +61,11 @@
 				bgimage = "img/test1.jpg";
 				changeBackground(bgimage);
 				console.log("second function firing");
+				bgtext = "Some text in a big font";
 			},
 
 			image03: () => { // Action for <section/> with data-id="image03"
+				bgtext = "";
 				bgimage = "img/Rail_Technology3.jpg";
 				changeBackground(bgimage);
 				console.log("third function firing");
@@ -142,6 +145,12 @@
 
 		<p>total progress</p>
 		<progress value={progress || 0}></progress>
+
+		{#if bgtext}
+		<h1>{bgtext}</h1>
+		{/if}
+
+
 	</div>
 
 	<div slot="foreground">
