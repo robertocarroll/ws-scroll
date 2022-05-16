@@ -39,7 +39,6 @@
 	function changeBackground(bgimage) {
 		console.log("background is " + bgimage);
 		fadein = false;
-		style = "";
 		style = `background-image: url(${bgimage}); height: ${innerHeight}px;`;
 
 		setTimeout(() => {
