@@ -11,6 +11,10 @@
     let container;
     let options;
 
+    if (location) {
+        $: console.log(location);
+    }
+
     if (location.bounds) {
         options = { bounds: location.bounds };
     } else if (location.lon && location.lat) {

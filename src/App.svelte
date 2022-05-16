@@ -82,7 +82,8 @@
 					pitch: 0.00,
 					bearing: 0.00
 				};
-				console.log("first map function firing" + location.centre);
+				map['flyTo'](location);
+				console.log("first map function firing" + JSON.stringify(location));
 			},
 
 			map02: () => { // Action for <section/> with data-id="map02"
@@ -92,7 +93,8 @@
 					pitch: 55.50,
 					bearing: -7.20
 				};
-				console.log("second map function firing" + location.centre);
+				map['flyTo'](location);
+				console.log("second map function firing" + JSON.stringify(location));
 			},
 
 			map03: () => { // Action for <section/> with data-id="map03"
@@ -102,7 +104,8 @@
 					pitch: 60.00,
 					bearing: -16.80
 				};
-				console.log("third map function firing" + location.centre);
+				map['flyTo'](location);
+				console.log("third map function firing" + JSON.stringify(location));
 			}
 		}
 
