@@ -17,6 +17,9 @@
 	let time = 0;
 	let duration;
 
+	let map = null;
+	let location;
+
 	$: time = duration * progress;
 
 	//	$: console.log(progress);
@@ -71,36 +74,35 @@
 				console.log("third function firing");
 			}
 		},
-		second_images: { // Actions for <Scroller/> with id="first-images"
-			image01: () => { // Action for <section/> with data-id="image01"
-				style = "";
-				bgimage = "img/WS_Impact_Illustrated_Set01.jpg";
-				console.log("first function firing");
-				style = `background-image: url(${bgimage});
-		height: ${innerHeight}px;`;
+		first_map: { // Actions for <Scroller/> with id="first_map"
+			map01: () => { // Action for <section/> with data-id="map01"
+				location = {
+					center: [-75.13080, 39.97790],
+					zoom: 9.83,
+					pitch: 0.00,
+					bearing: 0.00
+				};
+				console.log("first map function firing" + location.centre);
 			},
 
-			image02: () => { // Action for <section/> with data-id="image02"
-				style = "";
-				bgimage = "img/WS_Impact_Illustrated_Set02.jpg";
-				style = `background-image: url(${bgimage});
-		height: ${innerHeight}px;`;
-				console.log("second function firing");
-
+			map02: () => { // Action for <section/> with data-id="map02"
+				location = {
+					center: [-75.13901, 39.97085],
+					zoom: 11.62,
+					pitch: 55.50,
+					bearing: -7.20
+				};
+				console.log("second map function firing" + location.centre);
 			},
 
-			image03: () => { // Action for <section/> with data-id="image03"
-				bgimage = "img/WS_Impact_Illustrated_Set03.jpg";
-				style = `background-image: url(${bgimage});
-		height: ${innerHeight}px;`;
-				console.log("third function firing");
-			},
-
-			image03: () => { // Action for <section/> with data-id="image03"
-				bgimage = "img/WS_Impact_Illustrated_Set04.jpg";
-				style = `background-image: url(${bgimage});
-		height: ${innerHeight}px;`;
-				console.log("third function firing");
+			map03: () => { // Action for <section/> with data-id="map03"
+				location = {
+					center: [-75.16468, 39.94503],
+					zoom: 13.15,
+					pitch: 60.00,
+					bearing: -16.80
+				};
+				console.log("third map function firing" + location.centre);
 			}
 		}
 
@@ -204,73 +206,27 @@
 	</div>
 </section>
 
+<!-- First map scroller  -->
 
-<Scroller top="{0}" bottom="{1}" bind:id={id['second_images']} bind:count bind:index bind:offset bind:progress
-	{threshold}>
-	<div slot="background" class="bg-full-image" style="{style}">
-		<p>current section: <strong>{index + 1}/{count}</strong></p>
-		<progress value="{count ? (index + 1) / count : 0}"></progress>
-
-		<p>offset in current section</p>
-		<progress value={offset || 0}></progress>
-
-		<p>total progress</p>
-		<progress value={progress || 0}></progress>
-	</div>
-
-	<div slot="foreground">
-		<section data-id="image01">
-			<div class="scroll-box">
-				<p>
-					Section 1 - This chart shows the <strong>area in square kilometres</strong> of each local authority
-					district in
-					the UK. Each circle represents one district. The scale is logarithmic.
-				</p>
-			</div>
-		</section>
-		<section data-id="image02">
-			<div class="scroll-box">
-				<p>
-					Section 2 - This chart shows the <strong>area in square kilometres</strong> of each local authority
-					district in
-					the UK. Each circle represents one district. The scale is logarithmic.
-				</p>
-			</div>
-		</section>
-
-		<section data-id="image03">
-			<div class="scroll-box">
-				<p>
-					Section 3 - This chart shows the <strong>area in square kilometres</strong> of each local authority
-					district in
-					the UK. Each circle represents one district. The scale is logarithmic.
-				</p>
-			</div>
-		</section>
-	</div>
-</Scroller>
-
-<Scroller {top} {threshold} {bottom}>
+<Scroller {top} {threshold} {bottom} bind:id={id['first_map']}>
 	<div slot="background">
-		<figure>
-			<div class="col-full height-full">
 
-			</div>
-		</figure>
+		<Map bind:map={map} height: ${innerHeight}px />
+
 	</div>
 
 	<div slot="foreground">
-		<section>
+		<section data-id="map01">
 			<div class="col-medium">
 				<p>This is a map zoomed to the extents of <span class="em em-muted">England and Wales</span>.</p>
 			</div>
 		</section>
-		<section>
+		<section data-id="map02">
 			<div class="col-medium">
 				<p>This is where <span class="em em-muted">Fareham, Hampshire</span> is on the map.</p>
 			</div>
 		</section>
-		<section>
+		<section data-id="map03">
 			<div class="col-medium">
 				<p>This is where <span class="em em-muted">Newport, Gwent</span> is on the map.</p>
 			</div>
@@ -279,8 +235,7 @@
 </Scroller>
 
 
-<Scroller top="{0}" bottom="{1}" bind:id={id['first_images']} bind:count bind:index bind:offset bind:progress
-	{threshold}>
+<Scroller top="{0}" bottom="{1}" bind:count bind:index bind:offset bind:progress {threshold}>
 	<div slot="background">
 		<div class="video-container">
 			<video bind:currentTime={time} bind:duration preload="metadata" muted
