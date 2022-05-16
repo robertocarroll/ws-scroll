@@ -11,17 +11,19 @@
 	let innerHeight;
 	let bgimage = "img/Rail_Technology3.jpg";
 	let style;
+	let fadein = false;
 
 	let time = 0;
 	let duration;
 
 	$: time = duration * progress;
 
-	$: console.log(progress);
+	//	$: console.log(progress);
+	$: console.log(offset);
 
 	// CONFIG FOR SCROLLER COMPONENTS
 	// Config - Once a section crosses this point, it becomes 'active'
-	const threshold = 0.3;
+	const threshold = 0.7;
 	const top = 0;
 	const bottom = 1;
 
@@ -30,42 +32,40 @@
 	let id = {}; // Object to hold visible section IDs of Scroller components
 	let idPrev = {}; // Object to keep track of previous IDs, to compare for changes
 
-	let mapindex = [];
-	let mapindexPrev = [];
-
 	onMount(() => {
 		idPrev = { ...id };
-		// set first background image
-		style = `background-image: url(${bgimage});
-		height: ${innerHeight}px;`;
-
-		mapindexPrev = [...mapindex];
 	});
+
+	function changeBackground(bgimage) {
+		console.log("background is " + bgimage);
+		fadein = false;
+		style = "";
+		style = `background-image: url(${bgimage}); height: ${innerHeight}px;`;
+
+		setTimeout(() => {
+			fadein = true;
+		}, 400);
+	}
+
 
 	// Actions for Scroller components
 	const actions = {
 		first_images: { // Actions for <Scroller/> with id="first-images"
 			image01: () => { // Action for <section/> with data-id="image01"
-				style = "";
 				bgimage = "img/Rail_Technology3.jpg";
+				changeBackground(bgimage);
 				console.log("first function firing");
-				style = `background-image: url(${bgimage});
-		height: ${innerHeight}px;`;
 			},
 
 			image02: () => { // Action for <section/> with data-id="image02"
-				style = "";
 				bgimage = "img/test1.jpg";
-				style = `background-image: url(${bgimage});
-		height: ${innerHeight}px;`;
+				changeBackground(bgimage);
 				console.log("second function firing");
-
 			},
 
 			image03: () => { // Action for <section/> with data-id="image03"
 				bgimage = "img/Rail_Technology3.jpg";
-				style = `background-image: url(${bgimage});
-		height: ${innerHeight}px;`;
+				changeBackground(bgimage);
 				console.log("third function firing");
 			}
 		},
@@ -104,32 +104,6 @@
 
 	};
 
-	// MAP CODE
-	// Config
-
-	const mapbounds = {
-		ew: [[-5.816, 49.864], [1.863, 55.872]],
-		fareham: [[-1.2280, 50.8368], [-1.1650, 50.8699]],
-		newport: [[-3.0682, 51.5448], [-2.9170, 51.6258]]
-	};
-	// State
-	let map = null;
-
-	// Actions for MAP scroller
-	const mapActions = [
-		() => { map.fitBounds(mapbounds.ew) },
-		() => { map.fitBounds(mapbounds.fareham) },
-		() => { map.fitBounds(mapbounds.newport) }
-	];
-
-	// Reactive code to trigger MAP actions
-	$: if (map && mapindex[1] != mapindexPrev[1]) {
-		if (mapActions[+mapindex[1]]) {
-			mapActions[+mapindex[1]]();
-		}
-		mapindexPrev[1] = mapindex[1];
-	}
-
 	// Code to run Scroller actions when new caption IDs come into view
 	function runActions(codes = []) {
 		codes.forEach(code => {
@@ -160,7 +134,7 @@
 
 <Scroller top="{0}" bottom="{1}" bind:id={id['first_images']} bind:count bind:index bind:offset bind:progress
 	{threshold}>
-	<div slot="background" class="bg-full-image" style="{style}">
+	<div slot="background" class="bg-full-image bg-animate" style="{style}" class:fadein>
 		<p>current section: <strong>{index + 1}/{count}</strong></p>
 		<progress value="{count ? (index + 1) / count : 0}"></progress>
 
@@ -268,13 +242,11 @@
 	</div>
 </Scroller>
 
-<Map bind:map={map} />
-
-<Scroller {top} {threshold} {bottom} bind:mapindex={mapindex[1]}>
+<Scroller {top} {threshold} {bottom}>
 	<div slot="background">
 		<figure>
 			<div class="col-full height-full">
-				<Map bind:map={map} />
+
 			</div>
 		</figure>
 	</div>
