@@ -73,7 +73,7 @@
 			},
 
 			image02: () => { // Action for <section/> with data-id="image01"
-				bgimage = "img/Rail_Technology3.jpg";
+				bgimage = "img/first_images-image01.jpg";
 				changeBackground(bgimage);
 				console.log("second function firing");
 			},
