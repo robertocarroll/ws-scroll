@@ -15,8 +15,8 @@ body {
 }
 
 .scroll-box {
-	width: 50%;
-	transform: translate(30%, 0);
+	width: 40%;
+	transform: translate(10%, 0);
 	opacity: 0.9;
 	transition: background 500ms ease;
 }
