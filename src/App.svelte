@@ -22,8 +22,6 @@
 
 	$: time = duration * progress;
 
-	//	$: console.log(progress);
-	$: console.log(offset);
 
 	// CONFIG FOR SCROLLER COMPONENTS
 	// Config - Once a section crosses this point, it becomes 'active'
@@ -42,6 +40,7 @@
 
 	function changeBackground(bgimage) {
 		console.log("background is " + bgimage);
+		bgtext = "";
 		fadein = false;
 		style = `background-image: url(${bgimage}); height: ${innerHeight}px;`;
 
@@ -61,10 +60,10 @@
 			},
 
 			image02: () => { // Action for <section/> with data-id="image02"
-				bgimage = "img/test1.jpg";
+				bgimage = "";
 				changeBackground(bgimage);
 				console.log("second function firing");
-				bgtext = "Some text in a big font";
+				bgtext = "<h1 class='white lh-solid'>WorldSkills Members are <span class='text-serif yellow'>attracting</span> more young people to skills</h1>";
 			},
 
 			image03: () => { // Action for <section/> with data-id="image03"
@@ -115,6 +114,7 @@
 	function runActions(codes = []) {
 		codes.forEach(code => {
 			if (id[code] != idPrev[code]) {
+
 				if (actions[code][id[code]]) {
 					actions[code][id[code]]();
 				}
@@ -135,8 +135,9 @@
 </svelte:head>
 
 <Header bgimage="img/Australia_Trevor2.jpg">
-	<h1 class="ws-hero-title white hero-title-impact">1.<br> WORLDSKILLS <span class="yellow">INCREASES
-			THE NUMBER</span> OF SKILLED YOUNG PEOPLE</h1>
+	<h1 class="ws-hero-title white hero-title-impact lh-solid text-uppercase">1.<br> WorldSkills <span
+			class="yellow">increases the
+			number</span> of skilled young people</h1>
 </Header>
 
 <Scroller top="{0}" bottom="{1}" bind:id={id['first_images']} bind:count bind:index bind:offset bind:progress
@@ -152,7 +153,17 @@
 		<progress value={progress || 0}></progress>
 
 		{#if bgtext}
-		<h1>{bgtext}</h1>
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-sm order-last">
+					{@html bgtext}
+				</div>
+				<div class="col-sm">
+
+				</div>
+			</div>
+		</div>
+
 		{/if}
 
 
@@ -190,9 +201,9 @@
 	</div>
 </Scroller>
 
-<section style="background-image: url(img/Sky_Frame.jpeg);" class="bg-full-image vh-100">
+<section>
 	<div class="hero">
-		<figure class="ws-hero ws-hero-quote ws-hero-cyan ws-hero-sm">
+		<figure class="ws-hero ws-hero-quote ws-hero-cyan ws-hero-sm ws-impact-quote text-serif">
 			<blockquote class="ws-hero-title ws-small">“When I won a gold medal at WorldSkills Sao Paulo 2015, the world
 				was
 				seeing
@@ -212,9 +223,9 @@
 <!-- First map scroller  -->
 
 <Scroller {top} {threshold} {bottom} bind:id={id['first_map']}>
-	<div slot="background">
+	<div slot="background" style='height: {innerHeight}px'>
 
-		<Map bind:map={map} height: ${innerHeight}px />
+		<Map bind:map={map} />
 
 	</div>
 
@@ -237,17 +248,13 @@
 	</div>
 </Scroller>
 
-
+<!-- 
 <Scroller top="{0}" bottom="{1}" bind:count bind:index bind:offset bind:progress {threshold}>
 	<div slot="background">
 		<div class="video-container">
-			<video bind:currentTime={time} bind:duration preload="metadata" muted
-				src="https://static01.nyt.com/newsgraphics/2019/10/23/turkey-syria-video-upload/71ab097907156ca46fb7ffd4d21dfbd119fb47e8/syria-turkey-reconstruct-7-800.mp4"
+			<video bind:currentTime={time} bind:duration preload="metadata" muted src="/img/test-clip1.mp4"
 				type="video/mp4" />
-			<!--
-				alternative source:
-				src="https://int.nyt.com/newsgraphics/2020/beirut-explosion-video/main/warehouse-800.mp4" 
-			  -->
+
 		</div>
 	</div>
 
@@ -268,4 +275,4 @@
 			</div>
 		</section>
 	</div>
-</Scroller>
+</Scroller> -->
