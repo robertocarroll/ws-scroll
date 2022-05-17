@@ -13,6 +13,7 @@
 	let bgtext;
 	let style;
 	let fadein = false;
+	let scrollerActive = false;
 
 	let time = 0;
 	let duration;
@@ -21,6 +22,15 @@
 	let location;
 
 	$: time = duration * progress;
+
+	$: if (0 < progress && progress < 1) {
+		console.log('scroller active');
+		scrollerActive = true;
+	}
+	else {
+		console.log('scroller off');
+		scrollerActive = false;
+	}
 
 
 	// CONFIG FOR SCROLLER COMPONENTS
@@ -110,11 +120,15 @@
 
 	};
 
+	$: console.log(progress);
+
 	// Code to run Scroller actions when new caption IDs come into view
 	function runActions(codes = []) {
 		codes.forEach(code => {
+			console.log('the current id is' + id[code]);
+			console.log('the previous id is' + idPrev[code]);
 			if (id[code] != idPrev[code]) {
-
+				console.log('id is different');
 				if (actions[code][id[code]]) {
 					actions[code][id[code]]();
 				}
@@ -222,7 +236,7 @@
 
 <!-- First map scroller  -->
 
-<Scroller {top} {threshold} {bottom} bind:id={id['first_map']}>
+<Scroller {top} {threshold} {bottom} bind:id={id['first_map']} bind:count bind:index bind:offset bind:progress>
 	<div slot="background" style='height: {innerHeight}px'>
 
 		<Map bind:map={map} />
