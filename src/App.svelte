@@ -44,9 +44,9 @@
 	let id = {}; // Object to hold visible section IDs of Scroller components
 	let idPrev = {}; // Object to keep track of previous IDs, to compare for changes
 
-	onMount(() => {
-		idPrev = { ...id };
-	});
+	/* 	onMount(() => {
+			idPrev = { ...id };
+		}); */
 
 	function changeBackground(bgimage) {
 		console.log("background is " + bgimage);
@@ -63,24 +63,26 @@
 	// Actions for Scroller components
 	const actions = {
 		first_images: { // Actions for <Scroller/> with id="first-images"
-			image01: () => { // Action for <section/> with data-id="image01"
-				bgimage = "img/Rail_Technology3.jpg";
-				changeBackground(bgimage);
-				console.log("first function firing");
-			},
 
-			image02: () => { // Action for <section/> with data-id="image02"
+
+			image01: () => { // Action for <section/> with data-id="image02"
 				bgimage = "";
 				changeBackground(bgimage);
+				console.log("first function firing");
+				bgtext = "<h2 class='white lh-solid'>WorldSkills Members are <span class='text-serif yellow'>attracting</span> more young people to skills</h2>";
+			},
+
+			image02: () => { // Action for <section/> with data-id="image01"
+				bgimage = "img/Rail_Technology3.jpg";
+				changeBackground(bgimage);
 				console.log("second function firing");
-				bgtext = "<h1 class='white lh-solid'>WorldSkills Members are <span class='text-serif yellow'>attracting</span> more young people to skills</h1>";
 			},
 
 			image03: () => { // Action for <section/> with data-id="image03"
-				bgtext = "";
-				bgimage = "img/Rail_Technology3.jpg";
+				bgimage = "";
 				changeBackground(bgimage);
 				console.log("third function firing");
+				bgtext = "<h2 class='yellow text-uppercase lh-solid'>55% in 2016 to 62% in 2019</h2>";
 			}
 		},
 		first_map: { // Actions for <Scroller/> with id="first_map"
@@ -136,7 +138,7 @@
 			}
 		});
 	}
-	$: id && runActions(Object.keys(actions)); // Run above code when 'id' object changes
+	$: id && scrollerActive && runActions(Object.keys(actions)); // Run above code when 'id' object changes
 
 
 
@@ -145,10 +147,10 @@
 <svelte:window bind:innerHeight={innerHeight} />
 
 <svelte:head>
-	<link rel="preload" as="image" href="img/Australia_Trevor2.jpg" />
+	<link rel="preload" as="image" href="img/Euphrasia_YoungPerson.jpg" />
 </svelte:head>
 
-<Header bgimage="img/Australia_Trevor2.jpg">
+<Header bgimage="img/Euphrasia_YoungPerson.jpg">
 	<h1 class="ws-hero-title white hero-title-impact lh-solid text-uppercase">1.<br> WorldSkills <span
 			class="yellow">increases the
 			number</span> of skilled young people</h1>
@@ -157,18 +159,10 @@
 <Scroller top="{0}" bottom="{1}" bind:id={id['first_images']} bind:count bind:index bind:offset bind:progress
 	{threshold}>
 	<div slot="background" class="bg-full-image bg-animate" style="{style}" class:fadein>
-		<p>current section: <strong>{index + 1}/{count}</strong></p>
-		<progress value="{count ? (index + 1) / count : 0}"></progress>
-
-		<p>offset in current section</p>
-		<progress value={offset || 0}></progress>
-
-		<p>total progress</p>
-		<progress value={progress || 0}></progress>
 
 		{#if bgtext}
 		<div class="container">
-			<div class="row align-items-center">
+			<div class="row align-items-center" style='height: {innerHeight}px'>
 				<div class="col-sm order-last">
 					{@html bgtext}
 				</div>
@@ -185,30 +179,29 @@
 
 	<div slot="foreground">
 		<section data-id="image01">
-			<div class="scroll-box">
+			<div class="scroll-box ws-content">
 				<p>
-					Section 1 - This chart shows the <strong>area in square kilometres</strong> of each local authority
-					district in
-					the UK. Each circle represents one district. The scale is logarithmic.
+					The number of young people interested in learning about VET is going up. WorldSkills Members are
+					sharing data that points to an overall increase in students considering a vocational or technical
+					career path.
 				</p>
 			</div>
 		</section>
 		<section data-id="image02">
-			<div class="scroll-box">
+			<div class="scroll-box ws-content">
 				<p>
-					Section 2 - This chart shows the <strong>area in square kilometres</strong> of each local authority
-					district in
-					the UK. Each circle represents one district. The scale is logarithmic.
+					WorldSkills Sweden shared data from its 2016-2019 evaluation that showed how its effort to increase
+					the attractiveness of VET has increased the number of young people interested in vocational
+					education.
 				</p>
 			</div>
 		</section>
 
 		<section data-id="image03">
-			<div class="scroll-box">
+			<div class="scroll-box ws-content">
 				<p>
-					Section 3 - This chart shows the <strong>area in square kilometres</strong> of each local authority
-					district in
-					the UK. Each circle represents one district. The scale is logarithmic.
+					The number of ninth graders who consider taking a VET education grew 55% in 2016 to 62% in 2019. In
+					2019, 72% of young people also said that vocational programs provide a good education.
 				</p>
 			</div>
 		</section>
