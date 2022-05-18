@@ -95,7 +95,7 @@
 				bgimage = "";
 				changeBackground(bgimage);
 				console.log("second function firing");
-				bgtext = "<h2 class='white lh-solid'>WorldSkills Members are <span class='text-serif yellow'>attracting</span> more young people to skills</h2>";
+				bgtext = "<h2 class='yellow text-uppercase lh-solid'>Three-quarters of visitors say they learned about new career options in TVET</h2>";
 			},
 
 			image_02_03: () => { // Action for <section/> with data-id="image03"
@@ -147,8 +147,8 @@
 	// Code to run Scroller actions when new caption IDs come into view
 	function runActions(codes = []) {
 		codes.forEach(code => {
-			console.log('the current id is' + id[code]);
-			console.log('the previous id is' + idPrev[code]);
+			//console.log('the current id is' + id[code]);
+			//console.log('the previous id is' + idPrev[code]);
 			if (id[code] != idPrev[code]) {
 				//		console.log('id is different');
 				if (actions[code][id[code]]) {
@@ -158,9 +158,10 @@
 			}
 		});
 	}
-	$: id && scrollerActive && runActions(Object.keys(actions)); // Run above code when 'id' object changes
-	$: console.log(Object.keys(actions));
+	$: id && runActions(Object.keys(actions)); // Run above code when 'id' object changes
 
+	$: console.log(id);
+	$: console.log(idPrev);
 
 </script>
 
@@ -274,9 +275,10 @@
 		<section data-id="image_02_02">
 			<div class="scroll-box ws-content">
 				<p>
-					WorldSkills Sweden shared data from its 2016-2019 evaluation that showed how its effort to increase
-					the attractiveness of VET has increased the number of young people interested in vocational
-					education.
+					Skills Canada noticed the competition’s impact on spectators. In 2019, 68% of visitors to the
+					national competition said they learned new sources of information on how to pursue a career in
+					technical and vocational education and training (TVET), and three-quarters (76%) say they learned
+					about new career options in TVET.
 				</p>
 			</div>
 		</section>
@@ -284,14 +286,33 @@
 		<section data-id="image_02_03">
 			<div class="scroll-box ws-content">
 				<p>
-					WorldSkills Sweden shared details from its work in Uppsala County, as a host for the national skills
-					competition in 2018. After hosting the national skill competition in 2018, it saw a 2.1 % increase
-					in students taking part in vocational programmes
+					WorldSkills Sweden shared details from its work in Uppsala County. After hosting the national skill
+					competition in 2018, the region saw an increase in students taking part in vocational programmes.
 				</p>
 			</div>
 		</section>
 	</div>
 </Scroller>
+
+<section>
+	<div class="hero">
+		<figure class="ws-hero ws-hero-quote ws-hero-cyan ws-hero-sm ws-impact-quote text-serif">
+			<blockquote class="h2">“When I won a gold medal at WorldSkills Sao Paulo 2015, the
+				world
+				was
+				seeing
+				a boy that came from a place of social vulnerability, all because that boy had one opportunity to learn
+				a skill that he fell in love with.
+				My life was transformed because of WorldSkills. And I want everyone in the world to have the opportunity
+				to do the same.”</blockquote>
+			<figcaption>
+				<div class="ws-hero-desc">
+					<p>— Leo Rodrigues, WorldSkills Champion</p>
+				</div>
+			</figcaption>
+		</figure>
+	</div>
+</section>
 
 <!-- First map scroller  -->
 
@@ -321,24 +342,7 @@
 	</div>
 </Scroller>
 
-<section>
-	<div class="hero">
-		<figure class="ws-hero ws-hero-quote ws-hero-cyan ws-hero-sm ws-impact-quote text-serif">
-			<blockquote class="ws-hero-title ws-small">“When I won a gold medal at WorldSkills Sao Paulo 2015, the world
-				was
-				seeing
-				a boy that came from a place of social vulnerability, all because that boy had one opportunity to learn
-				a skill that he fell in love with.
-				My life was transformed because of WorldSkills. And I want everyone in the world to have the opportunity
-				to do the same.”</blockquote>
-			<figcaption>
-				<div class="ws-hero-desc">
-					<p>- Leo Rodrigues</p>
-				</div>
-			</figcaption>
-		</figure>
-	</div>
-</section> -->
+
 
 
 <!-- <Scroller top="{0}" bottom="{1}" bind:count bind:index bind:offset bind:progress {threshold}>

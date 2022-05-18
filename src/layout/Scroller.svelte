@@ -175,6 +175,7 @@
 
 			offset = (threshold_px - top) / (bottom - top);
 			id = section.dataset.id ? section.dataset.id : null;
+			console.log(id);
 			if (bottom >= threshold_px) break;
 		}
 	}
