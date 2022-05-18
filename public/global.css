@@ -68,9 +68,8 @@ body {
 	width: auto;
 	height: auto;
 	position: fixed;
-	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%);
+	transform: translate(-50%);
 }
 
 /* SCROLL-SPECIFIC ELEMENTS */

@@ -209,22 +209,13 @@
 	</div>
 </Scroller>
 
-<section>
-	<div class="hero">
-		<figure class="ws-hero ws-hero-quote ws-hero-cyan ws-hero-sm ws-impact-quote text-serif">
-			<blockquote class="ws-hero-title ws-small">“When I won a gold medal at WorldSkills Sao Paulo 2015, the world
-				was
-				seeing
-				a boy that came from a place of social vulnerability, all because that boy had one opportunity to learn
-				a skill that he fell in love with.
-				My life was transformed because of WorldSkills. And I want everyone in the world to have the opportunity
-				to do the same.”</blockquote>
-			<figcaption>
-				<div class="ws-hero-desc">
-					<p>- Leo Rodrigues</p>
-				</div>
-			</figcaption>
-		</figure>
+<section class="bg-full-image" style="background-image:url('img/Australia_Trevor2.jpg'); height: {innerHeight}px">
+	<div class="container h-100">
+		<div class="d-flex flex-column h-100 text-center">
+			<h2 class='white lh-solid'>WorldSkills Competitions are <span class='text-serif yellow'>inspiring</span>
+				young
+				people to get involved in skills
+		</div>
 	</div>
 </section>
 
@@ -276,7 +267,7 @@
 </section>
 
 
-<Scroller top="{0}" bottom="{1}" bind:count bind:index bind:offset bind:progress {threshold}>
+<!-- <Scroller top="{0}" bottom="{1}" bind:count bind:index bind:offset bind:progress {threshold}>
 	<div slot="background">
 		<div class="video-container">
 			<video bind:currentTime={time} bind:duration preload="metadata" muted src="/img/test-clip1.mp4"
@@ -302,4 +293,4 @@
 			</div>
 		</section>
 	</div>
-</Scroller>
+</Scroller> -->
