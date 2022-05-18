@@ -9,7 +9,7 @@
 
 	let index, offset, progress, count;
 	let innerHeight;
-	let bgimage = "img/Rail_Technology3.jpg";
+	let bgimage;
 	let bgtext;
 	let style;
 	let fadein = false;
@@ -200,7 +200,8 @@
 		<section data-id="image03">
 			<div class="scroll-box ws-content">
 				<p>
-					The number of ninth graders who consider taking a VET education grew 55% in 2016 to 62% in 2019. In
+					The number of ninth graders who consider taking a VET education grew from 55% in 2016 to 62% in
+					2019. In
 					2019, 72% of young people also said that vocational programs provide a good education.
 				</p>
 			</div>
@@ -255,7 +256,26 @@
 	</div>
 </Scroller>
 
-<!-- 
+<section>
+	<div class="hero">
+		<figure class="ws-hero ws-hero-quote ws-hero-cyan ws-hero-sm ws-impact-quote text-serif">
+			<blockquote class="ws-hero-title ws-small">“When I won a gold medal at WorldSkills Sao Paulo 2015, the world
+				was
+				seeing
+				a boy that came from a place of social vulnerability, all because that boy had one opportunity to learn
+				a skill that he fell in love with.
+				My life was transformed because of WorldSkills. And I want everyone in the world to have the opportunity
+				to do the same.”</blockquote>
+			<figcaption>
+				<div class="ws-hero-desc">
+					<p>- Leo Rodrigues</p>
+				</div>
+			</figcaption>
+		</figure>
+	</div>
+</section>
+
+
 <Scroller top="{0}" bottom="{1}" bind:count bind:index bind:offset bind:progress {threshold}>
 	<div slot="background">
 		<div class="video-container">
@@ -282,4 +302,4 @@
 			</div>
 		</section>
 	</div>
-</Scroller> -->
+</Scroller>
