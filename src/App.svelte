@@ -44,9 +44,6 @@
 	let id = {}; // Object to hold visible section IDs of Scroller components
 	let idPrev = {}; // Object to keep track of previous IDs, to compare for changes
 
-	onMount(() => {
-		idPrev = { ...id };
-	});
 
 	function changeBackground(bgimage) {
 		console.log("background is " + bgimage);
