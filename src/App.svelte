@@ -10,8 +10,16 @@
 	let index, offset, progress, count;
 	let innerHeight;
 	let bgimage;
-	let bgtext;
-	let style;
+	let bgtext = {
+		first: '',
+		second: '',
+		third: '',
+	};
+	let style = {
+		first: '',
+		second: '',
+		third: '',
+	};
 	let fadein = false;
 	let scrollerActive = false;
 
@@ -45,11 +53,11 @@
 	let idPrev = {}; // Object to keep track of previous IDs, to compare for changes
 
 
-	function changeBackground(bgimage) {
+	function changeBackground(key, bgimage) {
 		console.log("background is " + bgimage);
-		bgtext = "";
+		bgtext[key] = "";
 		fadein = false;
-		style = `background-image: url(${bgimage}); height: ${innerHeight}px;`;
+		style[key] = `background-image: url(${bgimage}); height: ${innerHeight}px;`;
 
 		setTimeout(() => {
 			fadein = true;
@@ -62,44 +70,44 @@
 		first_images: { // Actions for <Scroller/> with id="first-images"
 			image_01_01: () => { // Action for <section/> with data-id="image02"
 				bgimage = "";
-				changeBackground(bgimage);
+				changeBackground('first', bgimage);
 				console.log("first image first function firing");
-				bgtext = "<h2 class='white lh-solid'>WorldSkills Members are <span class='text-serif yellow'>attracting</span> more young people to skills</h2>";
+				bgtext['first'] = "<h2 class='white lh-solid'>WorldSkills Members are <span class='text-serif yellow'>attracting</span> more young people to skills</h2>";
 			},
 
 			image_01_02: () => { // Action for <section/> with data-id="image01"
 				bgimage = "img/first_images-image01.jpg";
-				changeBackground(bgimage);
+				changeBackground('first', bgimage);
 				console.log("second function firing");
 			},
 
 			image_01_03: () => { // Action for <section/> with data-id="image03"
 				bgimage = "";
-				changeBackground(bgimage);
+				changeBackground('first', bgimage);
 				console.log("third function firing");
-				bgtext = "<h2 class='yellow text-uppercase lh-solid'>55% in 2016 to 62% in 2019</h2>";
+				bgtext['first'] = "<h2 class='yellow text-uppercase lh-solid'>55% in 2016 to 62% in 2019</h2>";
 			}
 		},
 		second_images: { // Actions for <Scroller/> with id="second-images"
 			image_02_01: () => { // Action for <section/> with data-id="image02"
 				bgimage = "img/second_images-image02.jpg";
-				changeBackground(bgimage);
+				changeBackground('second', bgimage);
 				console.log("first function firing");
-				bgtext = "";
+				bgtext['second'] = "";
 			},
 
 			image_02_02: () => { // Action for <section/> with data-id="image01"
 				bgimage = "";
-				changeBackground(bgimage);
+				changeBackground('second', bgimage);
 				console.log("second function firing");
-				bgtext = "<h2 class='yellow text-uppercase lh-solid'>Three-quarters of visitors say they learned about new career options in TVET</h2>";
+				bgtext['second'] = "<h2 class='yellow text-uppercase lh-solid'>Three-quarters of visitors say they learned about new career options in TVET</h2>";
 			},
 
 			image_02_03: () => { // Action for <section/> with data-id="image03"
 				bgimage = "img/second_images-image01.jpg";
-				changeBackground(bgimage);
+				changeBackground('second', bgimage);
 				console.log("third function firing");
-				bgtext = "";
+				bgtext['second'] = "";
 			}
 		},
 		first_map: { // Actions for <Scroller/> with id="first_map"
@@ -176,13 +184,13 @@
 
 <Scroller top="{0}" bottom="{1}" bind:id={id['first_images']} bind:count bind:index bind:offset bind:progress
 	{threshold}>
-	<div slot="background" class="bg-full-image bg-animate" style="{style}" class:fadein>
+	<div slot="background" class="bg-full-image bg-animate" style="{style['first']}" class:fadein>
 
-		{#if bgtext}
+		{#if bgtext['first']}
 		<div class="container">
 			<div class="row align-items-center" style='height: {innerHeight}px'>
 				<div class="col-sm order-last">
-					{@html bgtext}
+					{@html bgtext['first']}
 				</div>
 				<div class="col-sm">
 
@@ -241,13 +249,13 @@
 
 <Scroller top="{0}" bottom="{1}" bind:id={id['second_images']} bind:count bind:index bind:offset bind:progress
 	{threshold}>
-	<div slot="background" class="bg-full-image bg-animate" style="{style}" class:fadein>
+	<div slot="background" class="bg-full-image bg-animate" style="{style['second']}" class:fadein>
 
-		{#if bgtext}
+		{#if bgtext['second']}
 		<div class="container">
 			<div class="row align-items-center" style='height: {innerHeight}px'>
 				<div class="col-sm order-last">
-					{@html bgtext}
+					{@html bgtext['second']}
 				</div>
 				<div class="col-sm">
 
