@@ -24,11 +24,11 @@
 	$: time = duration * progress;
 
 	$: if (0 < progress && progress < 1) {
-		console.log('scroller active');
+		//	console.log('scroller active');
 		scrollerActive = true;
 	}
 	else {
-		console.log('scroller off');
+		//	console.log('scroller off');
 		scrollerActive = false;
 	}
 
@@ -44,9 +44,9 @@
 	let id = {}; // Object to hold visible section IDs of Scroller components
 	let idPrev = {}; // Object to keep track of previous IDs, to compare for changes
 
-	/* 	onMount(() => {
-			idPrev = { ...id };
-		}); */
+	onMount(() => {
+		idPrev = { ...id };
+	});
 
 	function changeBackground(bgimage) {
 		console.log("background is " + bgimage);
@@ -63,26 +63,46 @@
 	// Actions for Scroller components
 	const actions = {
 		first_images: { // Actions for <Scroller/> with id="first-images"
-
-
-			image01: () => { // Action for <section/> with data-id="image02"
+			image_01_01: () => { // Action for <section/> with data-id="image02"
 				bgimage = "";
 				changeBackground(bgimage);
-				console.log("first function firing");
+				console.log("first image first function firing");
 				bgtext = "<h2 class='white lh-solid'>WorldSkills Members are <span class='text-serif yellow'>attracting</span> more young people to skills</h2>";
 			},
 
-			image02: () => { // Action for <section/> with data-id="image01"
+			image_01_02: () => { // Action for <section/> with data-id="image01"
 				bgimage = "img/first_images-image01.jpg";
 				changeBackground(bgimage);
 				console.log("second function firing");
 			},
 
-			image03: () => { // Action for <section/> with data-id="image03"
+			image_01_03: () => { // Action for <section/> with data-id="image03"
 				bgimage = "";
 				changeBackground(bgimage);
 				console.log("third function firing");
 				bgtext = "<h2 class='yellow text-uppercase lh-solid'>55% in 2016 to 62% in 2019</h2>";
+			}
+		},
+		second_images: { // Actions for <Scroller/> with id="second-images"
+			image_02_01: () => { // Action for <section/> with data-id="image02"
+				bgimage = "img/second_images-image02.jpg";
+				changeBackground(bgimage);
+				console.log("first function firing");
+				bgtext = "";
+			},
+
+			image_02_02: () => { // Action for <section/> with data-id="image01"
+				bgimage = "";
+				changeBackground(bgimage);
+				console.log("second function firing");
+				bgtext = "<h2 class='white lh-solid'>WorldSkills Members are <span class='text-serif yellow'>attracting</span> more young people to skills</h2>";
+			},
+
+			image_02_03: () => { // Action for <section/> with data-id="image03"
+				bgimage = "img/second_images-image01.jpg";
+				changeBackground(bgimage);
+				console.log("third function firing");
+				bgtext = "";
 			}
 		},
 		first_map: { // Actions for <Scroller/> with id="first_map"
@@ -122,7 +142,7 @@
 
 	};
 
-	$: console.log(progress);
+	//$: console.log(progress);
 
 	// Code to run Scroller actions when new caption IDs come into view
 	function runActions(codes = []) {
@@ -130,7 +150,7 @@
 			console.log('the current id is' + id[code]);
 			console.log('the previous id is' + idPrev[code]);
 			if (id[code] != idPrev[code]) {
-				console.log('id is different');
+				//		console.log('id is different');
 				if (actions[code][id[code]]) {
 					actions[code][id[code]]();
 				}
@@ -139,7 +159,7 @@
 		});
 	}
 	$: id && scrollerActive && runActions(Object.keys(actions)); // Run above code when 'id' object changes
-
+	$: console.log(Object.keys(actions));
 
 
 </script>
@@ -178,7 +198,7 @@
 	</div>
 
 	<div slot="foreground">
-		<section data-id="image01">
+		<section data-id="image_01_01">
 			<div class="scroll-box ws-content">
 				<p>
 					The number of young people interested in learning about VET is going up. WorldSkills Members are
@@ -187,7 +207,7 @@
 				</p>
 			</div>
 		</section>
-		<section data-id="image02">
+		<section data-id="image_01_02">
 			<div class="scroll-box ws-content">
 				<p>
 					WorldSkills Sweden shared data from its 2016-2019 evaluation that showed how its effort to increase
@@ -197,7 +217,7 @@
 			</div>
 		</section>
 
-		<section data-id="image03">
+		<section data-id="image_01_03">
 			<div class="scroll-box ws-content">
 				<p>
 					The number of ninth graders who consider taking a VET education grew from 55% in 2016 to 62% in
@@ -219,9 +239,63 @@
 	</div>
 </section>
 
+<!-- Second image scroller  -->
+
+<Scroller top="{0}" bottom="{1}" bind:id={id['second_images']} bind:count bind:index bind:offset bind:progress
+	{threshold}>
+	<div slot="background" class="bg-full-image bg-animate" style="{style}" class:fadein>
+
+		{#if bgtext}
+		<div class="container">
+			<div class="row align-items-center" style='height: {innerHeight}px'>
+				<div class="col-sm order-last">
+					{@html bgtext}
+				</div>
+				<div class="col-sm">
+
+				</div>
+			</div>
+		</div>
+
+		{/if}
+
+
+	</div>
+
+	<div slot="foreground">
+		<section data-id="image_02_01">
+			<div class="scroll-box ws-content">
+				<p>
+					Member data shows that national WorldSkills competitions can have a positive spill-over effect,
+					motivating more young people to pursue training or a career in technical skills.
+				</p>
+			</div>
+		</section>
+		<section data-id="image_02_02">
+			<div class="scroll-box ws-content">
+				<p>
+					WorldSkills Sweden shared data from its 2016-2019 evaluation that showed how its effort to increase
+					the attractiveness of VET has increased the number of young people interested in vocational
+					education.
+				</p>
+			</div>
+		</section>
+
+		<section data-id="image_02_03">
+			<div class="scroll-box ws-content">
+				<p>
+					WorldSkills Sweden shared details from its work in Uppsala County, as a host for the national skills
+					competition in 2018. After hosting the national skill competition in 2018, it saw a 2.1 % increase
+					in students taking part in vocational programmes
+				</p>
+			</div>
+		</section>
+	</div>
+</Scroller>
+
 <!-- First map scroller  -->
 
-<Scroller {top} {threshold} {bottom} bind:id={id['first_map']} bind:count bind:index bind:offset bind:progress>
+<!-- <Scroller {top} {threshold} {bottom} bind:id={id['first_map']} bind:count bind:index bind:offset bind:progress>
 	<div slot="background" style='height: {innerHeight}px'>
 
 		<Map bind:map={map} />
@@ -264,7 +338,7 @@
 			</figcaption>
 		</figure>
 	</div>
-</section>
+</section> -->
 
 
 <!-- <Scroller top="{0}" bottom="{1}" bind:count bind:index bind:offset bind:progress {threshold}>
