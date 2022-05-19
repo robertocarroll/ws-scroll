@@ -337,18 +337,30 @@
 
 	<div slot="foreground">
 		<section data-id="map01">
-			<div class="col-medium">
-				<p>This is a map zoomed to the extents of <span class="em em-muted">England and Wales</span>.</p>
+			<div class="scroll-box ws-content">
+				<p>
+					WorldSkills Sweden shared data from its 2016-2019 evaluation that showed how its effort to increase
+					the attractiveness of VET has increased the number of young people interested in vocational
+					education.
+				</p>
 			</div>
 		</section>
 		<section data-id="map02">
-			<div class="col-medium">
-				<p>This is where <span class="em em-muted">Fareham, Hampshire</span> is on the map.</p>
+			<div class="scroll-box ws-content">
+				<p>
+					WorldSkills Sweden shared data from its 2016-2019 evaluation that showed how its effort to increase
+					the attractiveness of VET has increased the number of young people interested in vocational
+					education.
+				</p>
 			</div>
 		</section>
 		<section data-id="map03">
-			<div class="col-medium">
-				<p>This is where <span class="em em-muted">Newport, Gwent</span> is on the map.</p>
+			<div class="scroll-box ws-content">
+				<p>
+					WorldSkills Sweden shared data from its 2016-2019 evaluation that showed how its effort to increase
+					the attractiveness of VET has increased the number of young people interested in vocational
+					education.
+				</p>
 			</div>
 		</section>
 	</div>
