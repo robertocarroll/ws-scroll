@@ -3,7 +3,8 @@
     import mapbox from 'mapbox-gl';
 
     export let location = {
-        center: [-75.16468, 39.94503],
+        lon: -75.16468,
+        lat: 39.94503,
         zoom: 13.15,
         pitch: 60.00,
         bearing: -16.80
