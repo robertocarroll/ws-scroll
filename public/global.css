@@ -15,10 +15,30 @@ body {
 }
 
 .scroll-box {
-	width: 40%;
-	transform: translate(10%, 0);
+	width: 90%;
+	margin: auto;
 	opacity: 0.9;
 	transition: background 500ms ease;
+}
+
+@media (min-width: 576px) {
+	.scroll-box {
+		width: 40%;
+		margin: 0;
+		transform: translate(10%, 0);
+		opacity: 0.9;
+		transition: background 500ms ease;
+	}
+}
+
+.limit-width {
+	width: 80%;
+}
+
+@media (min-width: 576px) {
+	.limit-width {
+		width: 50%;
+	}
 }
 
 .ws-impact-quote {
@@ -33,12 +53,20 @@ body {
 	line-height: 1;
 }
 
+.lh-title {
+	line-height: 1.25;
+}
+
 .white {
 	color: white;
 }
 
 .yellow {
 	color: #ffdf01;
+}
+
+.pink {
+	color: #D51067;
 }
 
 .height-full {

@@ -14,11 +14,13 @@
 		first: '',
 		second: '',
 		third: '',
+		fourth: ''
 	};
 	let style = {
 		first: '',
 		second: '',
 		third: '',
+		fourth: ''
 	};
 	let fadein = false;
 	let scrollerActive = false;
@@ -29,17 +31,16 @@
 	let map = null;
 	let location;
 
-	$: time = duration * progress;
-
-	$: if (0 < progress && progress < 1) {
-		//	console.log('scroller active');
-		scrollerActive = true;
-	}
-	else {
-		//	console.log('scroller off');
-		scrollerActive = false;
-	}
-
+	/* 	$: time = duration * progress;
+	
+		$: if (0 < progress && progress < 1) {
+			//	console.log('scroller active');
+			scrollerActive = true;
+		}
+		else {
+			//	console.log('scroller off');
+			scrollerActive = false;
+		} */
 
 	// CONFIG FOR SCROLLER COMPONENTS
 	// Config - Once a section crosses this point, it becomes 'active'
@@ -52,9 +53,7 @@
 	let id = {}; // Object to hold visible section IDs of Scroller components
 	let idPrev = {}; // Object to keep track of previous IDs, to compare for changes
 
-
 	function changeBackground(key, bgimage) {
-		console.log("background is " + bgimage);
 		bgtext[key] = "";
 		fadein = false;
 		style[key] = `background-image: url(${bgimage}); height: ${innerHeight}px;`;
@@ -71,20 +70,17 @@
 			image_01_01: () => { // Action for <section/> with data-id="image02"
 				bgimage = "";
 				changeBackground('first', bgimage);
-				console.log("first image first function firing");
 				bgtext['first'] = "<h2 class='white lh-solid'>WorldSkills Members are <span class='text-serif yellow'>attracting</span> more young people to skills</h2>";
 			},
 
 			image_01_02: () => { // Action for <section/> with data-id="image01"
 				bgimage = "img/first_images-image01.jpg";
 				changeBackground('first', bgimage);
-				console.log("second function firing");
 			},
 
 			image_01_03: () => { // Action for <section/> with data-id="image03"
 				bgimage = "";
 				changeBackground('first', bgimage);
-				console.log("third function firing");
 				bgtext['first'] = "<h2 class='yellow text-uppercase lh-solid'>55% in 2016 to 62% in 2019</h2>";
 			}
 		},
@@ -92,21 +88,18 @@
 			image_02_01: () => { // Action for <section/> with data-id="image02"
 				bgimage = "img/second_images-image02.jpg";
 				changeBackground('second', bgimage);
-				console.log("first function firing");
 				bgtext['second'] = "";
 			},
 
 			image_02_02: () => { // Action for <section/> with data-id="image01"
 				bgimage = "";
 				changeBackground('second', bgimage);
-				console.log("second function firing");
 				bgtext['second'] = "<h2 class='yellow text-uppercase lh-solid'>Three-quarters of visitors say they learned about new career options in TVET</h2>";
 			},
 
 			image_02_03: () => { // Action for <section/> with data-id="image03"
 				bgimage = "img/second_images-image01.jpg";
 				changeBackground('second', bgimage);
-				console.log("third function firing");
 				bgtext['second'] = "";
 			}
 		},
@@ -120,11 +113,9 @@
 				};
 				if (map) {
 					map['flyTo'](location);
-					console.log("first map function firing" + JSON.stringify(location));
 				}
 
 			},
-
 			map02: () => { // Action for <section/> with data-id="map02"
 				location = {
 					center: [-43.3431517, -22.8651765],
@@ -136,6 +127,57 @@
 					map['flyTo'](location);
 					console.log("second map function firing" + JSON.stringify(location));
 				}
+			}
+		},
+		third_images: { // Actions for <Scroller/> with id="third_images"
+			image_03_01: () => {
+				bgimage = "img/third_images-image01.jpg";
+				changeBackground('third', bgimage);
+				bgtext['third'] = "";
+			},
+			image_03_02: () => {
+				bgimage = "";
+				changeBackground('third', bgimage);
+				bgtext['third'] = "<h2 class='white lh-solid'>Leo didn’t fit the typical profile of a jeweler and was told as much. He knew nothing about the industry. But what he saw, he quickly fell in love with.</h2>";
+			},
+			image_03_03: () => {
+				bgimage = "img/third_images-image02.jpg";
+				changeBackground('third', bgimage);
+				bgtext['third'] = "";
+			},
+			image_03_04: () => {
+				bgimage = "img/third_images-image03.jpg";
+				changeBackground('third', bgimage);
+				bgtext['third'] = "";
+			},
+			image_03_05: () => {
+				bgimage = "img/third_images-image04.jpg";
+				changeBackground('third', bgimage);
+				bgtext['third'] = "";
+			},
+			image_03_06: () => {
+				bgimage = "img/globe.jpg";
+				changeBackground('third', bgimage);
+				bgtext['third'] = "";
+			}
+		},
+		fourth_images: { // Actions for <Scroller/> with id="fourth-images"
+			image_04_01: () => {
+				bgimage = "img/Skilled_Worker_V2.jpg";
+				changeBackground('fourth', bgimage);
+				bgtext['fourth'] = "";
+			},
+
+			image_04_02: () => {
+				bgimage = "";
+				changeBackground('fourth', bgimage);
+				bgtext['fourth'] = "<h2 class='white lh-solid'>Being an entrepreneur in Brazil is tough. <span class='text-serif yellow'>Only 1 in 5 companies</span> succeed after their first year of operations.</h2>";
+			},
+
+			image_04_03: () => {
+				bgimage = "img/third_images-image01.jpg";
+				changeBackground('fourth', bgimage);
+				bgtext['fourth'] = "";
 			}
 		}
 
@@ -158,9 +200,6 @@
 		});
 	}
 	$: id && runActions(Object.keys(actions)); // Run above code when 'id' object changes
-
-	$: console.log(id);
-	$: console.log(idPrev);
 
 </script>
 
@@ -293,7 +332,7 @@
 	</div>
 </Scroller>
 
-<section>
+<section style='height: {innerHeight}px' class="row align-items-center">
 	<div class="hero">
 		<figure class="ws-hero ws-hero-quote ws-hero-cyan ws-hero-sm ws-impact-quote text-serif">
 			<blockquote class="h2">“When I won a gold medal at WorldSkills Sao Paulo 2015, the
@@ -343,7 +382,174 @@
 	</div>
 </Scroller>
 
+<!-- Third image scroller  -->
 
+<Scroller top="{0}" bottom="{1}" bind:id={id['third_images']} bind:count bind:index bind:offset bind:progress
+	{threshold}>
+	<div slot="background" class="bg-full-image bg-animate" style="{style['third']}" class:fadein>
+
+		{#if bgtext['third']}
+		<div class="container">
+			<div class="row align-items-center" style='height: {innerHeight}px'>
+				<div class="col-sm order-last">
+					{@html bgtext['third']}
+				</div>
+				<div class="col-sm">
+
+				</div>
+			</div>
+		</div>
+
+		{/if}
+
+
+	</div>
+
+	<div slot="foreground">
+		<section data-id="image_03_01">
+			<div class="scroll-box ws-content">
+				<p>
+					Leo Rodrigues grew up in this environment. But from a young age, Leo was a dreamer. He would look up
+					at planes overhead and wish he was going wherever they were going.
+				</p>
+			</div>
+		</section>
+		<section data-id="image_03_02">
+			<div class="scroll-box ws-content">
+				<p>
+					As a 15 year-old, Leo was just like each one of the 15% of young people in Brazil who were
+					unemployed. He went searching for work and handed his CV out to anyone and everyone, leading to a
+					call back for an apprenticeship with HStern — a luxury jewelry maker. Curious, Leo accepted the
+					apprenticeship.
+				</p>
+			</div>
+		</section>
+
+		<section data-id="image_03_03">
+			<div class="scroll-box ws-content">
+				<p>
+					After noticing another jewelry student train to compete in the national WorldSkills competition, Leo
+					was inspired. What he saw was someone entirely focused on their craft. He realized to be good at
+					something he would have to put in the work. So, with the help of his WorldSkills trainer, Claudinei,
+					he honed his talents.
+				</p>
+			</div>
+		</section>
+
+		<section data-id="image_03_04">
+			<div class="scroll-box ws-content">
+				<p>
+					He trained 8 to 10 hours a day in the workshop working on technical skills like design, soldering,
+					surface finishing, sawing and dimension control. The WorldSkills Brazil trainers also prepared Leo
+					for other skills
+					he’d need for the competition - such as resilience, time keeping
+					and communication.
+				</p>
+			</div>
+		</section>
+
+		<section data-id="image_03_05">
+			<div class="scroll-box ws-content">
+				<p>
+					His success at the regional and national WorldSkills competitions saw Leo, a kid from the favelas,
+					take center stage for Team Brazil at WorldSkills São Paulo 2015. He took home Gold for Jewelry -
+					winning it for his country, his family and to show that a young person from a socially vulnerable
+					background can be the best and can redefine what it means to be a skilled jeweler.
+				</p>
+			</div>
+		</section>
+
+		<section data-id="image_03_06">
+			<div class="scroll-box ws-content">
+				<p>
+					After becoming the best, Leo wanted to train the best. He travelled to India to train the 2019
+					candidate.
+				</p>
+			</div>
+		</section>
+	</div>
+</Scroller>
+
+<section style='height: {innerHeight}px' class="row align-items-center">
+	<div class="hero">
+		<figure class="ws-hero ws-hero-quote ws-hero-cyan ws-hero-sm ws-impact-quote text-serif">
+			<blockquote class="h2">“I could see in their life, how I saw in my own, that there are people who perhaps
+				wouldn’t usually have the opportunity to learn a profession and transform their lives, having their
+				lives transformed because they were selected to train for the WorldSkills.”</blockquote>
+			<figcaption>
+				<div class="ws-hero-desc">
+					<p>— Leo Rodrigues, WorldSkills Champion</p>
+				</div>
+			</figcaption>
+		</figure>
+	</div>
+</section>
+
+<Scroller top="{0}" bottom="{1}" bind:id={id['fourth_images']} bind:count bind:index bind:offset bind:progress
+	{threshold}>
+	<div slot="background" class="bg-full-image bg-animate" style="{style['fourth']}" class:fadein>
+
+		{#if bgtext['fourth']}
+		<div class="container">
+			<div class="row align-items-center" style='height: {innerHeight}px'>
+				<div class="col-sm order-last">
+					{@html bgtext['fourth']}
+				</div>
+				<div class="col-sm">
+
+				</div>
+			</div>
+		</div>
+
+		{/if}
+
+	</div>
+
+	<div slot="foreground">
+		<section data-id="image_04_01">
+			<div class="scroll-box ws-content">
+				<p>
+					Suddenly opportunities opened for Leo and he decided to start his own jewelry business — not an easy
+					decision in the middle of an economic crisis. He had to quickly learn how to do everything in his
+					business from accounting to marketing.
+				</p>
+			</div>
+		</section>
+		<section data-id="image_04_02">
+			<div class="scroll-box ws-content">
+				<p>
+					The
+					perseverance and determination he gained from training and competing with WorldSkills helped him
+					secure his first client - the famous Brazilian haircare entrepreneur Zica Assis who also grew up in
+					the favelas and could relate to the struggles Leo had overcome.
+				</p>
+			</div>
+		</section>
+
+		<section data-id="image_04_03">
+			<div class="scroll-box ws-content">
+				<p>
+					Leo’s success has all come from that initial opportunity to train with WorldSkills. “I have been
+					able to build a business and create more jobs in my community. I love that my skills overflow and
+					bless the lives of other people.” One of these people who have been inspired by Leo is his own
+					sister Larissa, who is also a jeweler, and training to try and win gold at WorldSkills Brazil. “She
+					saw my story; she saw my pathway.”
+				</p>
+			</div>
+		</section>
+
+	</div>
+</Scroller>
+
+<section style="height: {innerHeight}px; background-image: url(' img/Sky_Frame.jpeg');"
+	class="row align-items-center justify-content-center">
+	<div class="hero limit-width">
+		<h2 class='white lh-title text-serif'><span class='pink'>The Impact?</span> WorldSkills reaches young people who
+			might not have equal access to education and training and shows them what’s possible through skills. Through
+			training, competitions, and its global network, WorldSkills helps young people be more
+			ambitious and unlock opportunities to excel.</h2>
+	</div>
+</section>
 
 <!-- <Scroller top="{0}" bottom="{1}" bind:count bind:index bind:offset bind:progress {threshold}>
 	<div slot="background">

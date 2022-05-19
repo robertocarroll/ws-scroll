@@ -9,7 +9,7 @@
         pitch: 0,
         bearing: 0
     };
-    export let style;
+
     export let map;
 
     let container;
