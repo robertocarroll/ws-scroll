@@ -14,22 +14,7 @@ body {
 
 }
 
-.scroll-box {
-	width: 90%;
-	margin: auto;
-	opacity: 0.9;
-	transition: background 500ms ease;
-}
 
-@media (min-width: 576px) {
-	.scroll-box {
-		width: 40%;
-		margin: 0;
-		transform: translate(10%, 0);
-		opacity: 0.9;
-		transition: background 500ms ease;
-	}
-}
 
 .limit-width {
 	width: 80%;
@@ -126,7 +111,7 @@ body {
 }
 
 [slot="foreground"] section div {
-	padding: 12px;
+	padding: 1.25rem 1em;
 	position: relative;
 }
 
@@ -137,6 +122,28 @@ body {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: #fff;
 	z-index: -1;
+}
+
+.scroll-box {
+	width: 90%;
+	margin: auto;
+	background: rgba(255, 255, 255, 0.9);
+	border: 1px solid rgba(0, 0, 0, .2);
+	padding: 1rem;
+}
+
+.scroll-box p {
+	margin: 0;
+}
+
+
+@media (min-width: 576px) {
+	.scroll-box {
+		width: 40%;
+		margin: 0;
+		transform: translate(10%, 0);
+		background: rgba(255, 255, 255, 0.9);
+		border: 1px solid rgba(0, 0, 0, .2);
+	}
 }
