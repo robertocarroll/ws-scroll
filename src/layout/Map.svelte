@@ -3,7 +3,10 @@
     import mapbox from 'mapbox-gl';
 
     export let location = {
-        bounds: [[-5.816, 49.864], [1.863, 55.872]] // England & Wales bounding box
+        center: [-75.16468, 39.94503],
+        zoom: 13.15,
+        pitch: 60.00,
+        bearing: -16.80
     };
     export let style;
     export let map;
@@ -12,9 +15,7 @@
     let options;
 
 
-    if (location.bounds) {
-        options = { bounds: location.bounds };
-    } else if (location.lon && location.lat) {
+    if (location.lon && location.lat) {
         options = {
             center: [location.lon, location.lat]
         }
@@ -39,6 +40,7 @@
             map.scrollZoom.disable();
         };
 
+
         document.head.appendChild(link);
 
         return () => {
@@ -52,6 +54,12 @@
     div {
         width: 100%;
         height: 100%;
+    }
+
+    /* Fix issue on mobile browser where scroll breaks  */
+    .mapboxgl-canvas-container.mapboxgl-touch-zoom-rotate.mapboxgl-touch-drag-pan,
+    .mapboxgl-canvas-container.mapboxgl-touch-zoom-rotate.mapboxgl-touch-drag-pan .mapboxgl-canvas {
+        touch-action: unset;
     }
 </style>
 

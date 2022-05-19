@@ -316,7 +316,7 @@
 
 <!-- First map scroller  -->
 
-<!-- <Scroller {top} {threshold} {bottom} bind:id={id['first_map']} bind:count bind:index bind:offset bind:progress>
+<Scroller {top} {threshold} {bottom} bind:id={id['first_map']} bind:count bind:index bind:offset bind:progress>
 	<div slot="background" style='height: {innerHeight}px'>
 
 		<Map bind:map={map} />
