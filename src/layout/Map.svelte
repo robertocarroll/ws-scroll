@@ -3,11 +3,11 @@
     import mapbox from 'mapbox-gl';
 
     export let location = {
-        lon: -75.16468,
-        lat: 39.94503,
-        zoom: 13.15,
-        pitch: 60.00,
-        bearing: -16.80
+        lon: -49.6657512,
+        lat: -15.1054913,
+        zoom: 3,
+        pitch: 0,
+        bearing: 0
     };
     export let style;
     export let map;

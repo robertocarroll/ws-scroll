@@ -113,8 +113,8 @@
 		first_map: { // Actions for <Scroller/> with id="first_map"
 			map01: () => { // Action for <section/> with data-id="map01"
 				location = {
-					center: [-75.13080, 39.97790],
-					zoom: 9.83,
+					center: [-49.6657512, -15.1054913],
+					zoom: 3,
 					pitch: 0.00,
 					bearing: 0.00
 				};
@@ -127,27 +127,14 @@
 
 			map02: () => { // Action for <section/> with data-id="map02"
 				location = {
-					center: [-75.13901, 39.97085],
-					zoom: 11.62,
+					center: [-43.3431517, -22.8651765],
+					zoom: 9.62,
 					pitch: 55.50,
 					bearing: -7.20
 				};
 				if (map) {
 					map['flyTo'](location);
 					console.log("second map function firing" + JSON.stringify(location));
-				}
-			},
-
-			map03: () => { // Action for <section/> with data-id="map03"
-				location = {
-					center: [-75.16468, 39.94503],
-					zoom: 13.15,
-					pitch: 60.00,
-					bearing: -16.80
-				};
-				if (map) {
-					map['flyTo'](location);
-					console.log("third map function firing" + JSON.stringify(location));
 				}
 			}
 		}
@@ -339,30 +326,20 @@
 		<section data-id="map01">
 			<div class="scroll-box ws-content">
 				<p>
-					WorldSkills Sweden shared data from its 2016-2019 evaluation that showed how its effort to increase
-					the attractiveness of VET has increased the number of young people interested in vocational
-					education.
+					In Brazil, about 17.1 million people live in the favelas of Rio de Janeiro.
 				</p>
 			</div>
 		</section>
 		<section data-id="map02">
 			<div class="scroll-box ws-content">
 				<p>
-					WorldSkills Sweden shared data from its 2016-2019 evaluation that showed how its effort to increase
-					the attractiveness of VET has increased the number of young people interested in vocational
-					education.
+					That’s 23% of the city’s population, around 1.5 million people. It is a harsh reality that doesn’t
+					present young people
+					with many opportunities to develop themselves.
 				</p>
 			</div>
 		</section>
-		<section data-id="map03">
-			<div class="scroll-box ws-content">
-				<p>
-					WorldSkills Sweden shared data from its 2016-2019 evaluation that showed how its effort to increase
-					the attractiveness of VET has increased the number of young people interested in vocational
-					education.
-				</p>
-			</div>
-		</section>
+
 	</div>
 </Scroller>
 
