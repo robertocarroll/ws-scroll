@@ -548,19 +548,19 @@
 	</div>
 </Scroller>
 
-<section style="height: {innerHeight}px; background-image: url(' img/Sky_Frame.jpeg');" class="bg-full-image">
-	<div class="container">
-		<div class="row align-items-center justify-content-center">
-			<div class="hero">
-				<h2 class='white lh-title text-serif'><span class='pink'>The Impact?</span> WorldSkills reaches young
-					people
-					who
-					might not have equal access to education and training and shows them what’s possible through skills.
-					Through
-					training, competitions, and its global network, WorldSkills helps young people be more
-					ambitious and unlock opportunities to excel.</h2>
-			</div>
+<section style="height: {innerHeight}px; background-image: url(' img/Sky_Frame.jpeg');" class="bg-full-image d-flex">
+	<div class="container my-auto" style="height: {innerHeight}px;>
+		<div class=" row align-items-center justify-content-center">
+		<div class="hero">
+			<h2 class='white lh-title text-serif'><span class='pink'>The Impact?</span> WorldSkills reaches young
+				people
+				who
+				might not have equal access to education and training and shows them what’s possible through skills.
+				Through
+				training, competitions, and its global network, WorldSkills helps young people be more
+				ambitious and unlock opportunities to excel.</h2>
 		</div>
+	</div>
 	</div>
 </section>
 
