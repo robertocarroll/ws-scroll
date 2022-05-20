@@ -492,7 +492,7 @@
 		{#if bgtext['fourth']}
 		<div class="container">
 			<div class="row align-items-center" style='height: {innerHeight}px'>
-				<div class="col-sm order-last">
+				<div class="col-sm order-sm-2">
 					{@html bgtext['fourth']}
 				</div>
 				<div class="col-sm">
