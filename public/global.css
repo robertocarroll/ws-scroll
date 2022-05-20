@@ -28,6 +28,8 @@ body {
 
 .ws-impact-quote {
 	background: none !important;
+	padding-left: 1em;
+	padding-right: 1em;
 }
 
 .vh-100 {
