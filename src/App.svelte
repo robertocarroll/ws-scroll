@@ -332,23 +332,25 @@
 	</div>
 </Scroller>
 
-<section style='height: {innerHeight}px' class="row align-items-center">
-	<div class="hero">
-		<figure class="ws-hero ws-hero-quote ws-hero-cyan ws-hero-sm ws-impact-quote text-serif">
-			<blockquote class="h2">“When I won a gold medal at WorldSkills Sao Paulo 2015, the
-				world
-				was
-				seeing
-				a boy that came from a place of social vulnerability, all because that boy had one opportunity to learn
-				a skill that he fell in love with.
-				My life was transformed because of WorldSkills. And I want everyone in the world to have the opportunity
-				to do the same.”</blockquote>
-			<figcaption>
-				<div class="ws-hero-desc">
-					<p>— Leo Rodrigues, WorldSkills Champion</p>
-				</div>
-			</figcaption>
-		</figure>
+<section style='height: {innerHeight}px' class="container">
+	<div class="row align-items-center">
+		<div class="hero">
+			<figure class="ws-hero ws-hero-quote ws-hero-cyan ws-hero-sm ws-impact-quote text-serif">
+				<blockquote class="h2">“When I won a gold medal at WorldSkills Sao Paulo 2015, the
+					world
+					was
+					seeing
+					a boy that came from a place of social vulnerability, all because that boy had one opportunity to learn
+					a skill that he fell in love with.
+					My life was transformed because of WorldSkills. And I want everyone in the world to have the opportunity
+					to do the same.”</blockquote>
+				<figcaption>
+					<div class="ws-hero-desc">
+						<p>— Leo Rodrigues, WorldSkills Champion</p>
+					</div>
+				</figcaption>
+			</figure>
+		</div>
 	</div>
 </section>
 
@@ -470,18 +472,20 @@
 	</div>
 </Scroller>
 
-<section style='height: {innerHeight}px' class="row align-items-center">
-	<div class="hero">
-		<figure class="ws-hero ws-hero-quote ws-hero-cyan ws-hero-sm ws-impact-quote text-serif">
-			<blockquote class="h2">“I could see in their life, how I saw in my own, that there are people who perhaps
-				wouldn’t usually have the opportunity to learn a profession and transform their lives, having their
-				lives transformed because they were selected to train for the WorldSkills.”</blockquote>
-			<figcaption>
-				<div class="ws-hero-desc">
-					<p>— Leo Rodrigues, WorldSkills Champion</p>
-				</div>
-			</figcaption>
-		</figure>
+<section style='height: {innerHeight}px' class="container">
+	<div class="row align-items-center">
+		<div class="hero">
+			<figure class="ws-hero ws-hero-quote ws-hero-cyan ws-hero-sm ws-impact-quote text-serif">
+				<blockquote class="h2">“I could see in their life, how I saw in my own, that there are people who perhaps
+					wouldn’t usually have the opportunity to learn a profession and transform their lives, having their
+					lives transformed because they were selected to train for the WorldSkills.”</blockquote>
+				<figcaption>
+					<div class="ws-hero-desc">
+						<p>— Leo Rodrigues, WorldSkills Champion</p>
+					</div>
+				</figcaption>
+			</figure>
+		</div>
 	</div>
 </section>
 
@@ -541,13 +545,14 @@
 	</div>
 </Scroller>
 
-<section style="height: {innerHeight}px; background-image: url(' img/Sky_Frame.jpeg');"
-	class="row align-items-center justify-content-center">
-	<div class="hero limit-width">
-		<h2 class='white lh-title text-serif'><span class='pink'>The Impact?</span> WorldSkills reaches young people who
-			might not have equal access to education and training and shows them what’s possible through skills. Through
-			training, competitions, and its global network, WorldSkills helps young people be more
-			ambitious and unlock opportunities to excel.</h2>
+<section style="height: {innerHeight}px; background-image: url(' img/Sky_Frame.jpeg');" class="container">
+	<div class="row align-items-center justify-content-center">
+		<div class="hero limit-width">
+			<h2 class='white lh-title text-serif'><span class='pink'>The Impact?</span> WorldSkills reaches young people who
+				might not have equal access to education and training and shows them what’s possible through skills. Through
+				training, competitions, and its global network, WorldSkills helps young people be more
+				ambitious and unlock opportunities to excel.</h2>
+		</div>
 	</div>
 </section>
 
