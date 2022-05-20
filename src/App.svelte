@@ -549,7 +549,7 @@
 </Scroller>
 
 <section style="height: {innerHeight}px; background-image: url(' img/Sky_Frame.jpeg');" class="bg-full-image d-flex">
-	<div class="container my-auto" style="height: {innerHeight}px;>
+	<div class="container my-auto" style="height: {innerHeight}px;">
 		<div class=" row align-items-center justify-content-center">
 		<div class="hero">
 			<h2 class='white lh-title text-serif'><span class='pink'>The Impact?</span> WorldSkills reaches young
